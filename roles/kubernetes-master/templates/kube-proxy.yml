@@ -11,6 +11,16 @@ spec:
     command:
     - /hyperkube
     - proxy
-    - --master=http://127.0.0.1:{{ kube_insecure_port }}
+    - --master=https://kubernetes.service.consul:{{ kube_master_port }}
+    - --kubeconfig=/etc/kubernetes/master.kubeconfig
+    - --proxy-mode=iptables
     securityContext:
       privileged: true
+    volumeMounts:
+    - mountPath: /etc/kubernetes
+      name: etc-kubernetes
+      readOnly: true
+  volumes:
+  - hostPath:
+      path: /etc/kubernetes
+    name: etc-kubernetes

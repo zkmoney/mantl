@@ -13,6 +13,7 @@ spec:
     - proxy
     - --master=https://kubernetes.service.consul:{{ kube_master_port }}
     - --kubeconfig=/etc/kubernetes/node.kubeconfig
+    - --proxy-mode=iptables
     securityContext:
       privileged: true
     volumeMounts:
