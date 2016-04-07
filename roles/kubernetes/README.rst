@@ -23,3 +23,5 @@ To talk to the services launched inside Kubernetes, launch them with the
 <https://aster.is/blog/2016/03/11/the-hamburger-of-kubernetes-service-types/>`_),
 then connect on the assigned port on any Kubernetes worker node. Consul service
 integration will happen in a future release.
+
+The Kubernetes dashboard is also available at ``/dashboard`` from the Mantl UI.
