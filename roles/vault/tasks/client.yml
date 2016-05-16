@@ -1,0 +1,8 @@
+---
+- name: install vault
+  sudo: yes
+  yum:
+    name: "{{ vault_package }}"
+    state: present
+  tags:
+    - vault

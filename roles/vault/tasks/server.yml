@@ -1,0 +1,72 @@
+---
+- name: install vault
+  sudo: yes
+  yum:
+    name: "{{ vault_package }}"
+    state: present
+  tags:
+    - vault
+    - bootstrap
+
+- name: configure vault
+  sudo: yes
+  template:
+    src: vault.hcl.j2
+    dest: /etc/vault/vault.hcl
+  tags:
+    - vault
+
+- name: copy secure_token script
+  sudo: yes
+  copy:
+    src: vault-enable-cert.sh
+    dest: /usr/local/bin/vault-enable-cert.sh
+    mode: 0755
+  tags:
+    - vault
+
+- name: create directories
+  sudo: yes
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /etc/systemd/system/vault.service.d
+    - /etc/vault/policies
+  tags:
+    - vault
+
+- name: copy config files
+  sudo: yes
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - src: 10-post.conf
+      dest: /etc/systemd/system/vault.service.d
+    - src: policy-secure-token.hcl
+      dest: /etc/vault/policies
+  tags:
+    - vault
+
+- name: enable vault
+  sudo: yes
+  service:
+    name: vault
+    enabled: yes
+    state: started
+  tags:
+    - vault
+
+- name: wait for vault port
+  wait_for:
+    port: 8200
+  tags:
+    - vault
+
+- name: register consul service
+  command: consul-cli service-register --port=8200 --id="vault:{{ inventory_hostname }}" vault
+  tags:
+    - vault
+
+- include: bootstrap.yml
