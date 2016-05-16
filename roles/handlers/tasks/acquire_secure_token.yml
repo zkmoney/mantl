@@ -1,0 +1,20 @@
+---
+- name: authenticate to vault
+  run_once: yes
+  command: curl -L -s --cert /etc/pki/tls/certs/host.cert --key /etc/pki/tls/private/host.key https://vault.service.consul:8200/v1/auth/cert/login -X POST
+  register: vault_auth_output
+
+- name: extract vault token
+  run_once: yes
+  set_fact:
+    vault_auth_token: "{{ (vault_auth_output.stdout|from_json)['auth']['client_token'] }}"
+
+- name: acquire secure_token
+  run_once: yes
+  command: "curl -L -s -X GET -H 'X-Vault-Token: {{ vault_auth_token }}' https://vault.service.consul:8200/v1/consul/creds/secure_token"
+  register: vault_secure_token_output
+
+- name: extract secure acl
+  run_once: yes
+  set_fact:
+    secure_acl_token: "{{ (vault_secure_token_output.stdout|from_json)['data']['token'] }}"

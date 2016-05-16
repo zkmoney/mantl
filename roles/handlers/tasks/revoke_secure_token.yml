@@ -1,0 +1,4 @@
+---
+- name: revoke secure_token
+  run_once: yes
+  command: "curl -L -s -X GET -H 'X-Vault-Token: {{ vault_auth_token }}' https://vault.service.consul:8200/v1/auth/token/revoke-self"
