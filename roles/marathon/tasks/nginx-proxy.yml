@@ -9,26 +9,34 @@
   tags:
     - marathon
 
+- include: ../../handlers/tasks/acquire_secure_token.yml
+  tags:
+   - marathon
+
 - name: write nginx config vars
   run_once: yes
-  command: consul-cli kv-write --token={{consul_acl_secure_token}} secure/marathon/nginx/do_ssl {{do_marathon_ssl}}
+  command: consul-cli kv-write --token={{secure_acl_token}} secure/marathon/nginx/do_ssl {{do_marathon_ssl}}
   tags:
     - marathon
 
 - name: write nginx config vars
   run_once: yes
-  command: consul-cli kv-write --token={{consul_acl_secure_token}} secure/marathon/nginx/do_auth {{do_marathon_auth}}
+  command: consul-cli kv-write --token={{secure_acl_token}} secure/marathon/nginx/do_auth {{do_marathon_auth}}
   tags:
     - marathon
 
 - name: write nginx config vars
   run_once: yes
-  command: consul-cli kv-write --token={{consul_acl_secure_token}} secure/marathon/proxy_port {{ marathon_proxy_port }}
+  command: consul-cli kv-write --token={{secure_acl_token}} secure/marathon/proxy_port {{ marathon_proxy_port }}
   tags:
     - marathon
 
 - name: write nginx config vars
   run_once: yes
-  command: consul-cli kv-write --token={{consul_acl_secure_token}} secure/marathon/port {{ marathon_port }}
+  command: consul-cli kv-write --token={{secure_acl_token}} secure/marathon/port {{ marathon_port }}
+  tags:
+    - marathon
+
+- include: ../../handlers/tasks/revoke_secure_token.yml
   tags:
     - marathon
