@@ -10,6 +10,12 @@
 # `roles/` directory, or by checking the online documentation at
 # docs.mantl.io.
 - hosts: all
+  gather_facts: yes
+  roles:
+    - common
+
+- hosts: role=control
+  gather_facts: no
   vars:
     # consul_acl_datacenter should be set to the datacenter you want to control
     # Consul ACLs. If you only have one datacenter, set it to that or remove
@@ -18,15 +24,63 @@
 
     consul_servers_group: role=control
   roles:
-    - common
+    - consul
+    - dnsmasq
+    - { role: vault, client: false }
+
+- hosts: role=worker
+  gather_facts: no
+  vars:
+    # consul_acl_datacenter should be set to the datacenter you want to control
+    # Consul ACLs. If you only have one datacenter, set it to that or remove
+    # this variable.
+    # consul_acl_datacenter: your_primary_datacenter
+
+    consul_servers_group: role=control
+  roles:
+    - consul
+    - dnsmasq
+    - { role: vault, client: true }
+
+- hosts: role=edge
+  gather_facts: no
+  vars:
+    # consul_acl_datacenter should be set to the datacenter you want to control
+    # Consul ACLs. If you only have one datacenter, set it to that or remove
+    # this variable.
+    # consul_acl_datacenter: your_primary_datacenter
+
+    consul_servers_group: role=control
+  roles:
+    - consul
+    - dnsmasq
+    - { role: vault, client: true }
+
+- hosts: role=kubeworker
+  gather_facts: no
+  vars:
+    # consul_acl_datacenter should be set to the datacenter you want to control
+    # Consul ACLs. If you only have one datacenter, set it to that or remove
+    # this variable.
+    # consul_acl_datacenter: your_primary_datacenter
+
+    consul_servers_group: role=control
+  roles:
+    - consul
+    - dnsmasq
+    - { role: vault, client: true }
+
+- hosts: all
+  gather_facts: no
+  vars:
+    consul_servers_group: role=control
+  roles:
     - lvm
     - docker
     - logrotate
     - consul-template
     - nginx
-    - consul
     - etcd
-    - dnsmasq
 
 # ROLES - after provisioning the software that's common to all hosts, we do
 # specialized hosts. This configuration has two major groups: control nodes and
@@ -61,7 +115,6 @@
     mesos_mode: leader
     zookeeper_server_group: role=control
   roles:
-    - vault
     - zookeeper
     - mesos
     - marathon
