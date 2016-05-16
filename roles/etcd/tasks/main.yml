@@ -59,7 +59,6 @@
     src: consul-check-etcd-member
     dest: /usr/local/bin
     mode: 0755
-  when: consul_dc_group is defined
   tags:
     - etcd
 
@@ -68,7 +67,6 @@
   copy:
     src: etcd-service.json
     dest: /etc/consul
-  when: consul_dc_group is defined
   notify:
     - reload consul
   tags:
