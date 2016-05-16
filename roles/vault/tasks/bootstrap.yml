@@ -12,7 +12,6 @@
 - name: extract keys
   sudo: yes
   run_once: yes
-  changed_when: no
   when: "'Vault is already initialized' not in vault_init_output.stdout"
   set_fact:
     vault_keys: "{{ (vault_init_output.stdout|from_json)['keys'] }}"
@@ -22,10 +21,17 @@
 - name: extract root token
   sudo: yes
   run_once: yes
-  changed_when: no
   when: "'Vault is already initialized' not in vault_init_output.stdout"
   set_fact:
     vault_token: "{{ (vault_init_output.stdout|from_json)['root_token'] }}"
+  tags:
+    - vault
+
+- name: set vault_token fact
+  run_once: yes
+  when: "'Vault is already initialized' in vault_init_output.stdout"
+  set_fact:
+    vault_token: "{{ vault_root_token }}"
   tags:
     - vault
 
@@ -54,3 +60,11 @@
     - vault
 
 - meta: flush_handlers
+
+- name: create secure_token policy
+  sudo: yes
+  run_once: yes
+  command: /usr/local/bin/vault-enable-cert.sh {{ vault_token }}
+  when: "'Vault is already initialized' not in vault_init_output.stdout"
+  tags:
+    - vault
