@@ -1,4 +1,13 @@
 ---
+- name: create directories
+  sudo: yes
+  file:
+    path: /etc/nginx/templates
+    state: directory
+    mode: 0755
+  tags:
+    - nginx
+
 - name: encrypt admin password
   sudo: yes
   shell: htpasswd -Bnb admin {{ nginx_admin_password | quote }} | cut -f 2 -d ':'
@@ -23,7 +32,36 @@
      dest: /usr/lib/systemd/system/nginx-consul.service
    - src: nginx-consul.env.j2
      dest: /etc/default/nginx-consul.env
-  notify:
-    - restart nginx-consul
   tags:
     - nginx
+  notify:
+    - restart nginx-consul
+
+- include: ../../handlers/tasks/acquire_secure_token.yml
+  tags: nginx
+
+- name: write nginx config vars
+  run_once: yes
+  command: consul-cli kv-write --token={{ secure_acl_token }} secure/consul/nginx/do_ssl {{do_consul_ssl}}
+  tags:
+    - nginx
+
+- name: write nginx config vars
+  run_once: yes
+  command: consul-cli kv-write --token={{ secure_acl_token }} secure/consul/nginx/do_auth {{do_consul_auth}}
+  tags:
+    - nginx
+
+- name: install nginx admin password
+  sudo: yes
+  run_once: yes
+  command: consul-cli kv-write --token={{ secure_acl_token }} secure/service/nginx/auth/users/admin '{{ nginx_admin_password_encrypted }}'
+  when: nginx_admin_password_encrypted is defined
+  tags:
+    - nginx
+
+- include: ../../handlers/tasks/revoke_secure_token.yml
+  tags: nginx
+
+- include: ../../consul/tasks/nginx_proxy.yml
+  tags: nginx

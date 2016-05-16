@@ -9,26 +9,6 @@
   tags:
     - consul
 
-- name: write nginx config vars
-  run_once: yes
-  command: consul-cli kv-write --token={{ consul_acl_secure_token }} secure/consul/nginx/do_ssl {{do_consul_ssl}}
-  tags:
-    - consul
-
-- name: write nginx config vars
-  run_once: yes
-  command: consul-cli kv-write --token={{ consul_acl_secure_token }} secure/consul/nginx/do_auth {{do_consul_auth}}
-  tags:
-    - consul
-
-- name: install nginx admin password
-  sudo: yes
-  run_once: yes
-  command: consul-cli kv-write --token={{ consul_acl_secure_token }} secure/service/nginx/auth/users/admin '{{ nginx_admin_password_encrypted }}'
-  when: nginx_admin_password_encrypted is defined
-  tags:
-    - consul
-
 - name: enable nginx-consul
   sudo: yes
   service:

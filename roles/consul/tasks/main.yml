@@ -84,4 +84,3 @@
   tags:
     - consul
 
-- include: nginx_proxy.yml
