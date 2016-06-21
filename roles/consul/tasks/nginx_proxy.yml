@@ -1,4 +1,9 @@
 ---
+
+- name: assert nginx folder
+  sudo: yes
+  file: path=/etc/nginx state=directory
+
 - name: deploy nginx template
   sudo: yes
   copy:
