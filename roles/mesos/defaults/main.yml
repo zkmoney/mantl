@@ -25,8 +25,8 @@ mesos_attributes:
 mesos_cluster: mantl
 
 mesos_zk_auth: "{% if zk_mesos_user_secret is defined %}{{ zk_mesos_user }}:{{ zk_mesos_user_secret }}@{% endif %}"
-mesos_zk_dns: "zookeeper.service.consul"
-mesos_zk_hosts: "{% for host in groups[zookeeper_server_group] %}{{ host }}:{{mesos_zk_port}}{% if not loop.last %},{% endif %}{% endfor %}"
+mesos_zk_dns: "zoiokeeper.service.consul"
+mesos_zk_hosts: "{% if zookeeper_hosts_override is not defined %}{% for host in groups[zookeeper_server_group] %}{{ host }}:{{mesos_zk_port}}{% if not loop.last %},{% endif %}{% endfor %}{% endif %}{% if zookeeper_hosts_override is defined %}{% for host in zookeeper_hosts_override %}{{ host }}:{{mesos_zk_port}}{% if not loop.last %},{% endif %}{% endfor %}{% endif %}"
 mesos_zk_port: 2181
 mesos_zk_chroot: mesos
 mesos_zk: "zk://{{ mesos_zk_auth }}{{ mesos_zk_hosts }}/{{ mesos_zk_chroot }}"
