@@ -1,4 +1,11 @@
 ---
+
+- name: assert nginx templates folder
+  sudo: yes
+  file: path=/etc/nginx/templates state=directory
+  tags:
+    - mesos
+
 - name: copy nginx configuration
   sudo: yes
   copy:
