@@ -12,6 +12,12 @@ independent of which provider you use to provision your servers.
 The easiest way to configure credentials for CloudFlare is by setting
 environment variables:
 
+  - CLOUDFLARE\_EMAIL  
+    Your e-mail address for the CloudFlare account
+
+  - CLOUDFLARE\_TOKEN  
+    The CloudFlare token (found in the CloudFlare admin panel)
+
 Alternatively, you can set up the CloudFlare provider credentials in
 your .tf file:
 

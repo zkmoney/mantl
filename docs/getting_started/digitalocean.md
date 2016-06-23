@@ -12,7 +12,13 @@ Terraform.
 Before we can build any servers using Terraform and Ansible, we need to
 configure authentication. We'll be filling in the authentication
 variables for the template located at
-`terraform/digitalocean.sample.tf`. It looks like this:
+`terraform/digitalocean.sample.tf`. It looks like
+    this:
+
+  - \[../../terraform/digitalocean.sample.tf\](../../terraform/digitalocean.sample.tf)
+    
+      - language  
+        javascript
 
 Copy that file in it's entirety to the root of the project to start
 customization. In the next sections, we'll explain how to obtain these
@@ -41,6 +47,9 @@ token.](/_static/digitalocean_created_token.png)
 
 If you don't want to keep your access token in a file, you can instead
 write it to an environment variable:
+
+  - DIGITALOCEAN\_TOKEN  
+    The DigitalOcean token to use for Terraform-created resources
 
 ### Regions and Sizes
 

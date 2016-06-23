@@ -12,6 +12,12 @@ independent of which provider you use to provision your servers.
 The easiest way to configure credentials for DNSimple is by setting
 environment variables:
 
+  - DNSIMPLE\_EMAIL  
+    Your e-mail address for the DNSimple account
+
+  - DNSIMPLE\_TOKEN  
+    The DNSimple token (found in the DNSimple admin panel)
+
 Alternatively, you can set up the DNSimple provider credentials in your
 .tf file:
 

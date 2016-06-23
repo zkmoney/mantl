@@ -16,7 +16,13 @@ provisioning.\<https://github.com/hashicorp/terraform/pull/2554\>.
 Before we can build any servers using Terraform and Ansible, we need to
 configure authentication. We'll be filling in the authentication
 variables for the template located at `terraform/softlayer.sample.tf`.
-It looks like this:
+It looks like
+    this:
+
+  - \[../../terraform/softlayer.sample.tf\](../../terraform/softlayer.sample.tf)
+    
+      - language  
+        javascript
 
 Copy that file in it's entirety to the root of the project to start
 customization. In the next sections, we'll describe the settings that
@@ -31,6 +37,12 @@ http://softlayer.com\<http://softlayer.com\>.
 This token, along with your username, must be put in your softlayer.tf
 file. Alternatively, if you don't want to put credentials in the
 terraform file, you can set environment variables:
+
+  - SOFTLAYER\_USERNAME  
+    The SoftLayer username
+
+  - SOFTLAYER\_API\_KEY  
+    The SoftLayer API key
 
 ## Provisioning
 

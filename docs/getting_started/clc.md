@@ -39,6 +39,8 @@ inlined as provider config.
 
 By environment variables:
 
+CLC\_USERNAME CLC\_PASSWORD CLC\_ACCOUNT
+
 Or conversely, via provider config:
 
 ``` sourceCode json

@@ -3,6 +3,8 @@
 Mantl is licensed under the Apache License, Version 2.0, the text of
 which is reproduced here:
 
+\[../LICENSE\](../LICENSE)
+
 ## Listing of Licenses
 
 The following is a list of the licenses of most included software.

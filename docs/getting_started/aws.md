@@ -15,6 +15,13 @@ configure authentication. We'll be filling in the authentication
 variables for the template located at `terraform/aws.sample.tf`. The
 beginning of it looks like this:
 
+  - \[../../terraform/aws.sample.tf\](../../terraform/aws.sample.tf)
+    
+      - end-before  
+        \# \_local is for development only
+    
+      - code
+
 Copy that *file* in it's entirety to the root of the project as `aws.tf`
 to start customization. In the next sections, we'll describe the
 settings that you need to configure.
@@ -130,6 +137,13 @@ Terraform template, you can add them to your
 [~/.aws/credentials](https://blogs.aws.amazon.com/security/post/Tx3D6U6WSFGOK2H/A-New-and-Standardized-Way-to-Manage-Credentials-in-the-AWS-SDKs)
 file or source them from the environment instead:
 
+  - AWS\_ACCESS\_KEY\_ID  
+    The AWS Access Key for a valid AWS account or IAM user with the
+    necessary permissions.
+
+  - AWS\_SECRET\_ACCESS\_KEY  
+    The AWS secret key.
+
 > **note**
 > 
 >   - As a [best
@@ -142,6 +156,9 @@ file or source them from the environment instead:
 [region](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
 where your cluster will be provisioned. As an alternative to specifying
 `region` in the file, it can be read from the environment:
+
+  - AWS\_DEFAULT\_REGION  
+    The AWS region in which to provision cluster instances.
 
 ### Basic Settings
 
@@ -269,9 +286,21 @@ a good explanation on how to configure and use remote state.
 ### Custom IAM Policy
 
 At the time of this writing, the following IAM policy grants the minimal
-permissions needed to provision an AWS cluster with Terraform.
+permissions needed to provision an AWS cluster with
+    Terraform.
 
-For managing DNS with Route 53, you can use a policy like the following:
+  - \[/\_static/aws\_custom\_iam\_policy.json\](/\_static/aws\_custom\_iam\_policy.json)
+    
+      - language  
+        javascript
+
+For managing DNS with Route 53, you can use a policy like the
+    following:
+
+  - \[/\_static/aws\_custom\_route53\_iam\_policy.json\](/\_static/aws\_custom\_route53\_iam\_policy.json)
+    
+      - language  
+        javascript
 
 You would replace HOSTED\_ZONE\_ID with the hosted zone ID of your
 domain in Route 53.

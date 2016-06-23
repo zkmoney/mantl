@@ -87,3 +87,154 @@ following values in these options:
 
 ## Options
 
+### security-setup
+
+  - \-h, --help  
+    Show the help message and exit
+
+  - \--no-verify-certificates  
+    By default `security-setup` will verify certificates when it runs,
+    to make sure they're still valid. However, do the way OpenSSL
+    handles verification errors this check may be somewhat brittle. If
+    this gives you trouble, disable it by specifying this flag.
+
+  - \--change-admin-password  
+    `security-setup` will normally ask for an admin password only if it
+    doesn't already have one. Setting this option will cause
+    `security-setup` to re-prompt for the admin password.
+
+  - \--enable  
+    Enable (or disable, if False) all security. This overrides all other
+    options.
+    
+    Default: `True`
+
+  - \--use-private-docker-registry  
+    Provide (or skip, if False) credentials for a private Docker
+    registry.
+    
+    Default: `False`
+
+  - \--consul  
+    Enable Consul security. This overrides all other Consul options.
+    
+    Default: `True`
+
+  - \--mesos  
+    Enable Mesos security. This overrides all other Mesos options.
+    
+    Default: `True`
+
+  - \--marathon  
+    Enable Marathon security. This overrides all other Marathon options.
+    
+    Default: `True`
+
+  - \--iptables  
+    Use iptables rules. This overrides all other options related to
+    iptables.
+    
+    Default: `True`
+
+  - \--cert-country  
+    Country to be used for certificates
+    
+    default: `US`
+
+  - \--cert-state  
+    State/region to be used for certificates
+    
+    default: `New York`
+
+  - \--cert-locality  
+    Locality to be used for certificates
+    
+    default: `Anytown`
+
+  - \--cert-organization  
+    Organization to be used for certificates
+    
+    default: `Example Company Inc`
+
+  - \--cert-unit  
+    Operational unit to be used for certificates
+    
+    default: `Operations`
+
+  - \--cert-email  
+    Contact email to use for certificates
+    
+    default: `operations@example.com`
+
+  - \--consul-location  
+    Location Consul will be accessed at. This will be used as the common
+    name in the Consul certificate.
+    
+    default: `consul.example.com`
+
+  - \--nginx-location  
+    Location nginx will be accessed at. This will be used as the common
+    name in the nginx certificate.
+    
+    default: `nginx.example.com`
+
+  - \--consul-auth  
+    enable Consul authentication
+    
+    default: `True`
+
+  - \--consul-ssl  
+    enable Consul SSL
+    
+    default: `True`
+
+  - \--consul-acl  
+    enable Consul ACLs
+    
+    default: `True`
+
+  - \--mesos-ssl  
+    enable Mesos SSL
+    
+    default: `True`
+
+  - \--mesos-auth  
+    enable Mesos authentication
+    
+    default: `True`
+
+  - \--mesos-framework-auth  
+    enable Mesos framework authentication
+    
+    default: `True`
+
+  - \--mesos-follower-auth  
+    enable Mesos follower authentication
+    
+    default: `True`
+
+  - \--mesos-iptables  
+    enable Mesos iptables rules to restrict access
+    
+    default: `True`
+
+  - \--marathon-ssl  
+    enable Marathon SSL
+    
+    default: `True`
+
+  - \--marathon-auth  
+    enable Marathon authentication
+    
+    default: `True`
+
+  - \--marathon-iptables  
+    enable Marathon iptables rules to restrict access
+    
+    default: `True`
+
+  - \--mantl-api-auth  
+    enable Mantl API Mesos credentials
+    
+    default: `True`
+

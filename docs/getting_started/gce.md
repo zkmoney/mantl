@@ -61,6 +61,12 @@ interface.](/_static/gce_zones.png)
 If you don't want to commit these values in a file, you can source them
 from the environment instead:
 
+  - GOOGLE\_PROJECT  
+    The ID of a project to apply resources to.
+
+  - GOOGLE\_REGION  
+    The region to operate under.
+
 `image` is the GCE image to use for your cluster instances. You can find
 image names under Images in the Compute Engine section of the GCP
 console.
@@ -195,4 +201,6 @@ a good explanation on how to configure and use remote state.
 ## Configuring DNS with Google Cloud DNS
 
 You can set up your DNS records with Terraform:
+
+\[TOC\]
 

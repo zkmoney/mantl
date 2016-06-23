@@ -35,6 +35,12 @@ needed by Terraform to interact with resources in your vSphere.
 certificates of the vCenter. If you have self-signed certificates it is
 necessary to set this parameter to `true`.
 
+  - VSPHERE\_USER  
+    The vSphere username with the necessary permissions.
+
+  - VSPHERE\_PASSWORD  
+    The password of the user.
+
 ### Basic settings
 
 `datacenter` is the name of datacenter in your vSphere environment. It

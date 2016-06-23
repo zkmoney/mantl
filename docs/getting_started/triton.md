@@ -86,3 +86,5 @@ cluster.
 
 You can set up your DNS records with Terraform:
 
+\[TOC\]
+

@@ -12,7 +12,13 @@ in the main project directory.
 Before we can build any servers using Terraform and Ansible, we need to
 configure authentication. We'll be filling in the authentication
 variables for the template located at
-`terraform/openstack-modules.sample.tf`. It looks like this:
+`terraform/openstack-modules.sample.tf`. It looks like
+    this:
+
+  - \[../../terraform/openstack-modules.sample.tf\](../../terraform/openstack-modules.sample.tf)
+    
+      - language  
+        javascript
 
 Copy that file in it's entirety to the root of the project to start
 customization. NOTE: All configuration entries needs to be completed. In
@@ -96,6 +102,12 @@ accordingly.
 
 The playbooks get Username/Password information via environment
 variables:
+
+  - OS\_USERNAME  
+    Your OpenStack username
+
+  - OS\_PASSWORD  
+    Your OpenStack password
 
 Before running terraform or any playbooks, run the following command to
 to pull in your username and password for Ansible to use, changing the
