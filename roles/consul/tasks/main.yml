@@ -30,8 +30,6 @@
 - name: assert consul restarted
   sudo: yes
   command: systemctl restart consul.service
-  notify:
-    - restart consul
   tags:
     - consul
 
