@@ -30,8 +30,7 @@ env:
 
 install:
   - pip install -r requirements.txt
-  - curl -SL -o terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-  - unzip -d testing/cache terraform.zip && export PATH=${PATH}:${pwd}/testing/cache/terraform
+  - curl -SL -o terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && unzip -d /usr/local/bin terraform.zip
 
 before_script:
   - terraform remote config -backend=s3 -backend-config='bucket=mantl-ci-remote-tfstate' -backend-config='key=${PROVIDER}/terraform.tfstate' -backend-config='region=us-west-1'
