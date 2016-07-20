@@ -9,7 +9,6 @@
     - "/srv/kubernetes"
     - "{{ kube_manifest_dir }}"
     - "{{ kube_podmaster_dir }}"
-    - "{{ kube_cert_dir }}"
     - "{{ kube_users_dir }}"
   tags:
     - kubernetes

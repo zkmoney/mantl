@@ -15,7 +15,7 @@ dns:
   - "{{ inventory_hostname }}"
   - "{{ inventory_hostname }}.node.consul"
   - "{{ ansible_hostname }}"
-  - "{{ ansible_ssh_hostname }}.node.consul"
+  - "{{ ansible_hostname }}.node.consul"
   - "*.service.consul"
 # What IP addresses will this certificate be valid for?
 ip:
