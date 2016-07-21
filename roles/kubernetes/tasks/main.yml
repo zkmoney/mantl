@@ -46,6 +46,13 @@
   tags:
     - kubernetes
 
+# Consul must be available when kubelet stores the manifests in the k/v.
+- name: wait for leader
+  command: /usr/local/bin/consul-wait-for-leader.sh
+  tags:
+    - consul
+    - kubernetes
+
 - name: generate kubelet kubeconfig
   sudo: yes
   template:
