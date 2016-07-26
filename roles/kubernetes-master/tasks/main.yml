@@ -4,6 +4,8 @@
   command: /usr/local/bin/consul-wait-for-leader.sh
   tags:
     - consul
+    - master
+    - kubernetes
 
 - name: generate kubernetes manifests
   sudo: yes
