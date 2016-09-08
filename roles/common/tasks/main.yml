@@ -1,4 +1,11 @@
 ---
+# hack to install on vagrant
+- name: remove mesos
+  sudo: yes
+  yum:
+    name: mesos
+    state: absent
+
 # default is etc/utc in build 20141129 [http://cloud.centos.org/centos/7/images/]
 - name: set timezone to etc/utc
   sudo: yes
