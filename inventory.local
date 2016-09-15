@@ -1,0 +1,16 @@
+control-01  ansible_ssh_host=192.168.100.101 ansible_ssh_private_key_file=.vagrant/machines/control-01/virtualbox/private_key
+
+worker-001  ansible_ssh_host=192.168.100.201 ansible_ssh_private_key_file=.vagrant/machines/worker-001/virtualbox/private_key
+worker-002  ansible_ssh_host=192.168.100.202 ansible_ssh_private_key_file=.vagrant/machines/worker-002/virtualbox/private_key
+worker-003  ansible_ssh_host=192.168.100.203 ansible_ssh_private_key_file=.vagrant/machines/worker-003/virtualbox/private_key
+
+edge-001    ansible_ssh_host=192.168.100.251  ansible_ssh_private_key_file=.vagrant/machines/edge-001/virtualbox/private_key
+
+[role=control]
+control-01
+
+[role=worker]
+worker-00[1:3]
+
+[role=edge]
+edge-001

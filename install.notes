@@ -1,0 +1,10 @@
+h3. Errors when running the ansible playbook
+
+Problem
+"the ipaddr filter requires python-netaddr be installed on the ansible controller"
+
+Why
+Occurs when the host machine needs netaddr
+
+Solution
+`pip install netaddr`
